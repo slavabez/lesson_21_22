@@ -5,6 +5,7 @@ import { store } from "./redux/store";
 
 import TodoForm from "./components/TodoForm";
 import TodoList from "./components/TodoList";
+import AlertAndLoading from "./components/AlertAndLoading";
 
 const { Title } = Typography;
 
@@ -14,6 +15,7 @@ function App() {
       <div>
         <Title>Todo list with Redux Toolkit</Title>
         <TodoForm />
+        <AlertAndLoading />
         <TodoList />
       </div>
     </Provider>

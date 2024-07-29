@@ -1,19 +1,16 @@
 import React from "react";
 import { Button, Form, Input } from "antd";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
-import { addTodo } from "../redux/todoSlice";
+import { addTodoThunk } from "../redux/thunks";
 
 const TodoForm = () => {
   const dispatch = useDispatch();
+  const isAdding = useSelector((state) => state.todo.isAdding);
   const [form] = Form.useForm();
 
   const onFinish = (values) => {
-    dispatch(
-      addTodo({
-        title: values.newTask,
-      })
-    );
+    dispatch(addTodoThunk(values.newTask));
     form.resetFields();
   };
   const onFinishFailed = (errorInfo) => {
@@ -45,7 +42,7 @@ const TodoForm = () => {
       </Form.Item>
 
       <Form.Item>
-        <Button type="primary" htmlType="submit">
+        <Button type="primary" htmlType="submit" loading={isAdding}>
           Add
         </Button>
       </Form.Item>

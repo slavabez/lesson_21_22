@@ -1,15 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Divider, List, Typography, Flex, Button } from "antd";
 import { CheckOutlined, DeleteOutlined } from "@ant-design/icons";
 import { useSelector, useDispatch } from "react-redux";
 
-import { deleteTodo, toggleTodo } from "../redux/todoSlice";
+import {
+  fetchTodosThunk,
+  toggleTodoThunk,
+  deleteTodoThunk,
+} from "../redux/thunks";
 
 const { Text } = Typography;
 
 const TodoList = () => {
   const todoList = useSelector((state) => state.todo.todos);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchTodosThunk());
+  }, []);
 
   return (
     <>
@@ -26,11 +34,7 @@ const TodoList = () => {
                   type="default"
                   icon={<CheckOutlined />}
                   onClick={() => {
-                    dispatch(
-                      toggleTodo({
-                        id: item.id,
-                      })
-                    );
+                    dispatch(toggleTodoThunk(item.id));
                   }}
                 />
                 <Button
@@ -38,11 +42,7 @@ const TodoList = () => {
                   danger
                   icon={<DeleteOutlined />}
                   onClick={() => {
-                    dispatch(
-                      deleteTodo({
-                        id: item.id,
-                      })
-                    );
+                    dispatch(deleteTodoThunk(item.id));
                   }}
                 />
               </div>
