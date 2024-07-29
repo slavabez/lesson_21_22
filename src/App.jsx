@@ -7,6 +7,8 @@ import TodoForm from "./components/TodoForm";
 import TodoList from "./components/TodoList";
 import AlertAndLoading from "./components/AlertAndLoading";
 
+import "./index.css";
+
 const { Title } = Typography;
 
 function App() {

@@ -8,6 +8,7 @@ import {
   toggleTodoThunk,
   deleteTodoThunk,
 } from "../redux/thunks";
+import TodoItem from "./TodoItem";
 
 const { Text } = Typography;
 
@@ -25,30 +26,7 @@ const TodoList = () => {
       <List
         bordered
         dataSource={todoList}
-        renderItem={(item) => (
-          <List.Item>
-            <Flex justify="space-between" style={{ width: "100%" }}>
-              <Text disabled={item.completed}>{item.title}</Text>
-              <div>
-                <Button
-                  type="default"
-                  icon={<CheckOutlined />}
-                  onClick={() => {
-                    dispatch(toggleTodoThunk(item.id));
-                  }}
-                />
-                <Button
-                  type="default"
-                  danger
-                  icon={<DeleteOutlined />}
-                  onClick={() => {
-                    dispatch(deleteTodoThunk(item.id));
-                  }}
-                />
-              </div>
-            </Flex>
-          </List.Item>
-        )}
+        renderItem={(item) => <TodoItem item={item} />}
       />
     </>
   );
